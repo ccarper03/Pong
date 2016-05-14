@@ -55,5 +55,6 @@ public class Ball : MonoBehaviour
 		// ||
 		// || -1 <- at the bottom of the racket
 		return (ballPos.y - racketPos.y) / racketHeight;
+        // some comment
 	}
 }
