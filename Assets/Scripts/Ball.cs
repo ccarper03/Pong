@@ -8,6 +8,7 @@ public class Ball : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		//hypothetical changes
 		GetComponent<Rigidbody2D> ().velocity = Vector2.right * speed;
 	}
 	
