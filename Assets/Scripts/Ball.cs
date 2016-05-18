@@ -11,7 +11,8 @@ public class Ball : MonoBehaviour
 		GetComponent<Rigidbody2D> ().velocity = Vector2.right * speed;
 	}
 	
-	void OnCollisionEnter2D(Collision2D col) {
+	void OnCollisionEnter2D(Collision2D col)
+    {
 		// Note: 'col' holds the collision information. If the
 		// Ball collided with a racket, then:
 		//   col.gameObject is the racket
@@ -19,7 +20,8 @@ public class Ball : MonoBehaviour
 		//   col.collider is the racket's collider
 
 		// Hit the left Racket?
-		if (col.gameObject.name == "RacketLeft") {
+		if (col.gameObject.name == "RacketLeft")
+        {
 			// Calculate hit Factor
 			float y = hitFactor(transform.position,
 				col.transform.position,
@@ -33,7 +35,8 @@ public class Ball : MonoBehaviour
 		}
 
 		// Hit the right Racket?
-		if (col.gameObject.name == "RacketRight") {
+		if (col.gameObject.name == "RacketRight")
+        {
 			// Calculate hit Factor
 			float y = hitFactor(transform.position,
 				col.transform.position,
@@ -45,9 +48,23 @@ public class Ball : MonoBehaviour
 			// Set Velocity with dir * speed
 			GetComponent<Rigidbody2D>().velocity = dir * speed;
 		}
-	}
-	float hitFactor(Vector2 ballPos, Vector2 racketPos,
-		float racketHeight) {
+        //Ball hits left goal
+        //Accumilate score for right player
+        if (col.gameObject.name == "LeftGoal")
+        {
+            resetGame();
+        }
+        //Ball hits right goal
+        //Accumilate score for left player
+        if (col.gameObject.name == "RightGoal")
+        {
+            resetGame();
+        }
+    }
+
+    float hitFactor(Vector2 ballPos, Vector2 racketPos,
+		float racketHeight)
+    {
 		// ascii art:
 		// ||  1 <- at the top of the racket
 		// ||
@@ -57,4 +74,9 @@ public class Ball : MonoBehaviour
 		return (ballPos.y - racketPos.y) / racketHeight;
         // some comment
 	}
+
+    void resetGame()
+    {
+        Application.LoadLevel(Application.loadedLevel);
+    }
 }
